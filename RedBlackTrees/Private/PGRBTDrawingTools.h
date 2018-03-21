@@ -19,12 +19,27 @@
 #ifndef REDBLACKTREE_PGRBTDRAWINGTOOLS_H
 #define REDBLACKTREE_PGRBTDRAWINGTOOLS_H
 
-#import "RedBlackTrees.h"
+#import <Cocoa/Cocoa.h>
 
-NS_ASSUME_NONNULL_BEGIN
+#ifdef DEBUG
 
-void drawMyNodes(PGRBTNode *rootNode, NSString *filename);
+@class PGRBTNode;
 
-NS_ASSUME_NONNULL_END
+@interface PGRBTNode()
 
-#endif //REDBLACKTREE_PGRBTDRAWINGTOOLS_H
+    @property(nonatomic, readonly, nonnull) NSRect *rect;
+    @property(nonatomic, readonly, nonnull) NSRect *frect;
+
+@end
+
+#define NODE_DIAM     (75.0)
+#define NODE_HALFDIAM (NODE_DIAM * 0.5)
+#define DELTA_Y       (94.0)
+#define DELTA_X       (75.0)
+#define MARGIN        (10.0)
+
+void drawMyNodes(PGRBTNode *_Nullable rootNode, NSString *const _Nonnull filename);
+
+#endif // DEBUG
+
+#endif // REDBLACKTREE_PGRBTDRAWINGTOOLS_H

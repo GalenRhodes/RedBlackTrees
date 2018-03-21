@@ -16,6 +16,9 @@
  **********************************************************************************************************************************************************************************/
 
 #import "PGRBTDrawingTools.h"
+#import "PGRBTNode.h"
+
+#ifdef DEBUG
 
 /*
  * Definitions for standard 32-bit RGBA color model.
@@ -42,7 +45,7 @@ NS_INLINE NSRect centerInside(NSRect r, NSSize s) {
     // return NSMakeRect(NSMinX(r) + ((NSWidth(r) - s.width) * 0.5), NSMinY(r) - ((NSHeight(r) - s.height) * 0.5), s.width, s.height);
 }
 
-NS_INLINE BOOL saveImage(NSBitmapImageRep *img, NSString *filename) {
+NS_INLINE BOOL saveImage(NSBitmapImageRep *img, NSString *const filename) {
     NSError  *error     = nil;
     NSString *sFilename = [NSString stringWithFormat:filename, ++zzz];
     BOOL     result     = [[img representationUsingType:NSPNGFileType properties:@{}] writeToFile:sFilename options:0 error:&error];
@@ -63,7 +66,7 @@ NSShadow *nodeShadow() {
     return shadow;
 }
 
-void drawNodeText(NSString *textContent, NSRect rect) {
+void drawNodeText(NSString *const textContent, NSRect rect) {
     static NSDictionary *attrs = nil;
 
     if(attrs == nil) {
@@ -90,7 +93,7 @@ void drawNodeText(NSString *textContent, NSRect rect) {
     [NSGraphicsContext restoreGraphicsState];
 }
 
-void drawNode(BOOL isRed, NSString *textContent, NSRect nodeRect) {
+void drawNodeBody(BOOL isRed, NSString *const textContent, NSRect nodeRect) {
     NSBezierPath *circlePath = [NSBezierPath bezierPathWithOvalInRect:nodeRect];
 
     [NSGraphicsContext saveGraphicsState];
@@ -108,7 +111,7 @@ void drawNode(BOOL isRed, NSString *textContent, NSRect nodeRect) {
     drawNodeText(textContent, nodeRect);
 }
 
-void drawNodeLine(NSRect parentRect, NSRect childRect) {
+void drawNodeParentLine(NSRect parentRect, NSRect childRect) {
     static NSColor *lineColor = nil;
 
     if(lineColor == nil) {
@@ -180,42 +183,16 @@ NSBitmapImageRep *createARGBImage(CGFloat width, CGFloat height) {
                                           bitsPerPixel:(PGBitsPerField * PGFieldsPerPixel)];
 }
 
-NS_INLINE NSRect invertRect(NSRect *r, CGFloat h) {
-    // return NSMakeRect(r->origin.x, (h - r->origin.y), r->size.width, r->size.height);
-    return *r;
-}
-
-void drawNodes(PGRBTNode *node, CGFloat imgHeight, NSString *filename, NSBitmapImageRep *img) {
+void drawNodes(PGRBTNode *node) {
     if(node) {
-        drawNodes(node.leftNode, imgHeight, filename, img);
-        drawNodes(node.rightNode, imgHeight, filename, img);
-
-        NSRect rect = invertRect(node.rect, imgHeight);
-//        NSRect       frect      = invertRect(node.frect, imgHeight);
-//        NSBezierPath *frectPath = [NSBezierPath bezierPathWithRect:frect];
-//        NSBezierPath *rectPath  = [NSBezierPath bezierPathWithRect:rect];
-
-        [NSGraphicsContext saveGraphicsState];
-        [nodeShadow() set];
-//        [NSColor.greenColor setStroke];
-//        [frectPath setLineWidth:2];
-//        [frectPath stroke];
-//
-//        [NSColor.redColor setStroke];
-//        [rectPath setLineWidth:2];
-//        [rectPath stroke];
-
-        [[NSGraphicsContext currentContext] flushGraphics];
-        [NSGraphicsContext restoreGraphicsState];
-
-        //saveImage(img, filename);
-
-        if(node.parentNode) drawNodeLine(invertRect(node.parentNode.rect, imgHeight), rect);
-        drawNode(node.isRed, (NSString *)node.key, rect);
+        if(node.parentNode) drawNodeParentLine(*(node.parentNode.rect), *(node.rect));
+        drawNodes(node.leftNode);
+        drawNodes(node.rightNode);
+        drawNodeBody(node.isRed, (NSString *)node.key, *(node.rect));
     }
 }
 
-void drawMyNodes(PGRBTNode *rootNode, NSString *filename) {
+void drawMyNodes(PGRBTNode *rootNode, NSString *const filename) {
     setNodeRect(rootNode, 0, 0);
 
     NSSize            imgSize = getRootNodeSize(rootNode);
@@ -236,7 +213,7 @@ void drawMyNodes(PGRBTNode *rootNode, NSString *filename) {
     [tx scaleXBy:1.0 yBy:-1.0];
     [tx concat];
 
-    drawNodes(rootNode, imgSize.height, filename, img);
+    drawNodes(rootNode);
 
     [ctx flushGraphics];
     [ctx restoreGraphicsState];
@@ -244,3 +221,5 @@ void drawMyNodes(PGRBTNode *rootNode, NSString *filename) {
 
     saveImage(img, filename);
 }
+
+#endif

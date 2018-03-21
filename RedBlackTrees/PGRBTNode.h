@@ -21,14 +21,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-#ifdef DEBUG
-    #define NODE_DIAM     (75.0)
-    #define NODE_HALFDIAM ((NODE_DIAM + 1.0) * 0.5)
-    #define DELTA_Y       (94.0)
-    #define DELTA_X       (75.0)
-    #define MARGIN        (10.0)
-#endif
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PGRBTNode<K, V> : NSObject
@@ -41,10 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
     @property(nonatomic, nullable, retain) /*  */ PGRBTNode<K, V> *leftNode;
     @property(nonatomic, nullable, retain) /*  */ PGRBTNode<K, V> *rightNode;
     @property(nonatomic, nullable, readonly) /**/ PGRBTNode<K, V> *rootNode;
-#ifdef DEBUG
-    @property(nonatomic, readonly) /*          */ NSRect /*    */ *rect;
-    @property(nonatomic, readonly) /*          */ NSRect /*    */ *frect;
-#endif
 
     -(instancetype)initWithValue:(V)value forKey:(id<NSCopying>)key;
 

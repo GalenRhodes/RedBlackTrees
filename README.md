@@ -1,4 +1,4 @@
-# RedBlackTree
+# RedBlackTrees
 
-RedBlackTree is an Objective-C library that implements a classic Red-Black
+RedBlackTrees is an Objective-C library that implements a classic Red-Black
 binary tree.

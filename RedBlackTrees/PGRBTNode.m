@@ -15,9 +15,9 @@
 
 #import "PGRBTNode.h"
 #import "PGRBTInternal.h"
+#import "PGRBTDrawingTools.h"
 
 @implementation PGRBTNode {
-        NSRect _zrect, _zfrect;
     }
 
     @synthesize key = _key;
@@ -50,15 +50,23 @@
             _rightNode  = nil;
             _isRed      = YES;
 #ifdef DEBUG
-            _zrect  = NSMakeRect(MARGIN, MARGIN, NODE_DIAM, NODE_DIAM);
-            _zfrect = _zrect;
-            _rect   = &_zrect;
-            _frect  = &_zfrect;
+            _rect  = (NSRect *)calloc(1, sizeof(NSRect));
+            _frect = (NSRect *)calloc(1, sizeof(NSRect));
+            _rect->size.width = _rect->size.height = _frect->size.width = _frect->size.height = NODE_DIAM;
 #endif
         }
 
         return self;
     }
+
+#ifdef DEBUG
+
+    -(void)dealloc {
+        if(_rect) free(_rect);
+        if(_frect) free(_frect);
+    }
+
+#endif
 
     -(PGRBTNode *)_findNodeWithKey:(id)key comparator:(NSComparator)comparator {
         switch(comparator(self.key, key)) {
