@@ -7,14 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1117D151302E721C0610ABC0 /* PGRBTEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DF6E9DEDC6FB80BD82CE /* PGRBTEnumerator.h */; };
+		1117D4CDFFA6B9C6A0F151A3 /* PGRBTDrawingTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D0F21D6AD141D304A28C /* PGRBTDrawingTools.h */; };
+		1117D533D878B64743736D19 /* PGRBTMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DA0491941D65EE157A35 /* PGRBTMap.h */; };
+		1117D56E939835C4D1162749 /* PGRBTMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DD76A280BA4524330C9F /* PGRBTMap.m */; };
+		1117D62B8A624DB5474D2087 /* PGRBTInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D97E677F5992CBB67F67 /* PGRBTInternal.m */; };
+		1117D8ABDFE9C1BCAB7461A3 /* PGRBTInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D1039074C557CC2ED035 /* PGRBTInternal.h */; };
+		1117DA198F0514536325E850 /* PGRBTNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D42CF306F40BC02F2AEC /* PGRBTNode.h */; };
+		1117DB37B2DDBB584AFAC2F8 /* PGRBTEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D93B1DB53080086CA810 /* PGRBTEnumerator.m */; };
+		1117DBC254DB6ED29E0D39F9 /* PGRBTDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DEF0017098BF862D69D4 /* PGRBTDrawingTools.m */; };
+		1117DEC04297637FD0F5C7A9 /* PGRBTNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D271EEF07795ED8F66FA /* PGRBTNode.m */; };
 		83381A432062DC8500EC3526 /* RedBlackTrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 83381A422062DC8500EC3526 /* RedBlackTrees.h */; };
 		83381A452062DC8500EC3526 /* RedBlackTrees.m in Sources */ = {isa = PBXBuildFile; fileRef = 83381A442062DC8500EC3526 /* RedBlackTrees.m */; };
+		83381A572062E37700EC3526 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1117D9230B3229FD53656E9D /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		83381A552062E34700EC3526 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83381A372062DC8400EC3526 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83381A3E2062DC8400EC3526;
+			remoteInfo = RedBlackTrees;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1117D0F21D6AD141D304A28C /* PGRBTDrawingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRBTDrawingTools.h; sourceTree = "<group>"; };
+		1117D1039074C557CC2ED035 /* PGRBTInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRBTInternal.h; sourceTree = "<group>"; };
+		1117D271EEF07795ED8F66FA /* PGRBTNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGRBTNode.m; sourceTree = "<group>"; };
+		1117D309A286A4D43E2F63AC /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		1117D42CF306F40BC02F2AEC /* PGRBTNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRBTNode.h; sourceTree = "<group>"; };
+		1117D49E1A56627C3F51DB41 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		1117D6AEAEFB8BB6169E499E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1117D7CB6818225A312BAC5B /* macInstall.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = macInstall.sh; sourceTree = "<group>"; };
+		1117D9230B3229FD53656E9D /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		1117D93B1DB53080086CA810 /* PGRBTEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGRBTEnumerator.m; sourceTree = "<group>"; };
+		1117D97E677F5992CBB67F67 /* PGRBTInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGRBTInternal.m; sourceTree = "<group>"; };
+		1117DA0491941D65EE157A35 /* PGRBTMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRBTMap.h; sourceTree = "<group>"; };
+		1117DBE262C285A011B643C9 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		1117DC95DD21F09955C17A5B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		1117DD76A280BA4524330C9F /* PGRBTMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGRBTMap.m; sourceTree = "<group>"; };
+		1117DEF0017098BF862D69D4 /* PGRBTDrawingTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGRBTDrawingTools.m; sourceTree = "<group>"; };
+		1117DF6E9DEDC6FB80BD82CE /* PGRBTEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGRBTEnumerator.h; sourceTree = "<group>"; };
 		83381A3F2062DC8400EC3526 /* libRedBlackTrees.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libRedBlackTrees.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		83381A422062DC8500EC3526 /* RedBlackTrees.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedBlackTrees.h; sourceTree = "<group>"; };
 		83381A442062DC8500EC3526 /* RedBlackTrees.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedBlackTrees.m; sourceTree = "<group>"; };
+		83381A4F2062E31E00EC3526 /* RedBlackTreesRes.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RedBlackTreesRes.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		83381A512062E31E00EC3526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,14 +65,56 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		83381A4C2062E31E00EC3526 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1117D16FFD79E4D2493995B3 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				1117D49E1A56627C3F51DB41 /* Info.plist */,
+				1117DBE262C285A011B643C9 /* CMakeLists.txt */,
+			);
+			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		1117D19D71A6E304CAEDC072 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				1117DF6E9DEDC6FB80BD82CE /* PGRBTEnumerator.h */,
+				1117D93B1DB53080086CA810 /* PGRBTEnumerator.m */,
+				1117D1039074C557CC2ED035 /* PGRBTInternal.h */,
+				1117D0F21D6AD141D304A28C /* PGRBTDrawingTools.h */,
+				1117DEF0017098BF862D69D4 /* PGRBTDrawingTools.m */,
+				1117D97E677F5992CBB67F67 /* PGRBTInternal.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		1117D1A3937CFB1F60132780 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				1117D309A286A4D43E2F63AC /* CMakeLists.txt */,
+				1117DC95DD21F09955C17A5B /* LICENSE */,
+				1117D7CB6818225A312BAC5B /* macInstall.sh */,
+				1117D6AEAEFB8BB6169E499E /* README.md */,
+			);
+			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		83381A362062DC8400EC3526 = {
 			isa = PBXGroup;
 			children = (
 				83381A412062DC8400EC3526 /* RedBlackTrees */,
+				83381A502062E31E00EC3526 /* RedBlackTreesRes */,
 				83381A402062DC8400EC3526 /* Products */,
+				1117D1A3937CFB1F60132780 /* SupportingFiles */,
 			);
 			sourceTree = "<group>";
 		};
@@ -40,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				83381A3F2062DC8400EC3526 /* libRedBlackTrees.dylib */,
+				83381A4F2062E31E00EC3526 /* RedBlackTreesRes.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -49,8 +132,23 @@
 			children = (
 				83381A422062DC8500EC3526 /* RedBlackTrees.h */,
 				83381A442062DC8500EC3526 /* RedBlackTrees.m */,
+				1117DA0491941D65EE157A35 /* PGRBTMap.h */,
+				1117DD76A280BA4524330C9F /* PGRBTMap.m */,
+				1117D42CF306F40BC02F2AEC /* PGRBTNode.h */,
+				1117D271EEF07795ED8F66FA /* PGRBTNode.m */,
+				1117D16FFD79E4D2493995B3 /* SupportingFiles */,
+				1117D19D71A6E304CAEDC072 /* Private */,
 			);
 			path = RedBlackTrees;
+			sourceTree = "<group>";
+		};
+		83381A502062E31E00EC3526 /* RedBlackTreesRes */ = {
+			isa = PBXGroup;
+			children = (
+				1117D9230B3229FD53656E9D /* Localizable.strings */,
+				83381A512062E31E00EC3526 /* Info.plist */,
+			);
+			path = RedBlackTreesRes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -61,6 +159,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				83381A432062DC8500EC3526 /* RedBlackTrees.h in Headers */,
+				1117D533D878B64743736D19 /* PGRBTMap.h in Headers */,
+				1117DA198F0514536325E850 /* PGRBTNode.h in Headers */,
+				1117D151302E721C0610ABC0 /* PGRBTEnumerator.h in Headers */,
+				1117D8ABDFE9C1BCAB7461A3 /* PGRBTInternal.h in Headers */,
+				1117D4CDFFA6B9C6A0F151A3 /* PGRBTDrawingTools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +187,24 @@
 			productReference = 83381A3F2062DC8400EC3526 /* libRedBlackTrees.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		83381A4E2062E31E00EC3526 /* RedBlackTreesRes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83381A542062E31E00EC3526 /* Build configuration list for PBXNativeTarget "RedBlackTreesRes" */;
+			buildPhases = (
+				83381A4B2062E31E00EC3526 /* Sources */,
+				83381A4C2062E31E00EC3526 /* Frameworks */,
+				83381A4D2062E31E00EC3526 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				83381A562062E34700EC3526 /* PBXTargetDependency */,
+			);
+			name = RedBlackTreesRes;
+			productName = RedBlackTreesRes;
+			productReference = 83381A4F2062E31E00EC3526 /* RedBlackTreesRes.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -94,6 +215,10 @@
 				ORGANIZATIONNAME = "Project Galen";
 				TargetAttributes = {
 					83381A3E2062DC8400EC3526 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					83381A4E2062E31E00EC3526 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
@@ -112,9 +237,21 @@
 			projectRoot = "";
 			targets = (
 				83381A3E2062DC8400EC3526 /* RedBlackTrees */,
+				83381A4E2062E31E00EC3526 /* RedBlackTreesRes */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83381A4D2062E31E00EC3526 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83381A572062E37700EC3526 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		83381A3B2062DC8400EC3526 /* Sources */ = {
@@ -122,10 +259,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				83381A452062DC8500EC3526 /* RedBlackTrees.m in Sources */,
+				1117D56E939835C4D1162749 /* PGRBTMap.m in Sources */,
+				1117DEC04297637FD0F5C7A9 /* PGRBTNode.m in Sources */,
+				1117DB37B2DDBB584AFAC2F8 /* PGRBTEnumerator.m in Sources */,
+				1117DBC254DB6ED29E0D39F9 /* PGRBTDrawingTools.m in Sources */,
+				1117D62B8A624DB5474D2087 /* PGRBTInternal.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83381A4B2062E31E00EC3526 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		83381A562062E34700EC3526 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83381A3E2062DC8400EC3526 /* RedBlackTrees */;
+			targetProxy = 83381A552062E34700EC3526 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		83381A462062DC8500EC3526 /* Debug */ = {
@@ -255,6 +412,36 @@
 			};
 			name = Release;
 		};
+		83381A522062E31E00EC3526 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
+				INFOPLIST_FILE = RedBlackTreesRes/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.RedBlackTreesRes;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		83381A532062E31E00EC3526 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
+				INFOPLIST_FILE = RedBlackTreesRes/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.RedBlackTreesRes;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -272,6 +459,15 @@
 			buildConfigurations = (
 				83381A492062DC8500EC3526 /* Debug */,
 				83381A4A2062DC8500EC3526 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83381A542062E31E00EC3526 /* Build configuration list for PBXNativeTarget "RedBlackTreesRes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83381A522062E31E00EC3526 /* Debug */,
+				83381A532062E31E00EC3526 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,9 +1,9 @@
 /*******************************************************************************************************************************************************************************//**
- *     PROJECT: RedBlackTrees
- *    FILENAME: RedBlackTrees.h
+ *     PROJECT: RedBlackTree
+ *    FILENAME: PGRBTEnumerator.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 3/13/18
+ *        DATE: 3/15/18
  *  VISIBILITY: Private
  *
  * Copyright © 2018 Project Galen. All rights reserved.
@@ -16,12 +16,32 @@
  * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  **********************************************************************************************************************************************************************************/
 
+#ifndef REDBLACKTREE_PGRBTENUMERATOR_H
+#define REDBLACKTREE_PGRBTENUMERATOR_H
+
 #import <Cocoa/Cocoa.h>
 
-FOUNDATION_EXPORT const double        RedBlackTreesVersionNumber;
-FOUNDATION_EXPORT const unsigned char RedBlackTreesVersionString[];
+@class PGRBTNode;
+@class PGRBTMap;
 
-FOUNDATION_EXPORT NSString *const RedBlackTreesBundleName;
+typedef NS_OPTIONS(uint8_t, PGRBTEnumeratorOptions) {
+    EnumerateForward = 1, EnumerateValues = 2
+};
 
-#import "PGRBTNode.h"
-#import "PGRBTMap.h"
+NS_ASSUME_NONNULL_BEGIN
+
+@interface PGRBTEnumerator<__covariant T> : NSEnumerator<T>
+
+    @property(nonatomic, readonly, retain) PGRBTMap *map;
+    @property(nonatomic, readonly) /*   */ BOOL     enumForward;
+    @property(nonatomic, readonly) /*   */ BOOL     enumValues;
+
+    -(instancetype)initWithMap:(PGRBTMap *)map root:(PGRBTNode *)root options:(PGRBTEnumeratorOptions)options;
+
+    -(T)nextObject;
+
+@end
+
+NS_ASSUME_NONNULL_END
+
+#endif //REDBLACKTREE_PGRBTENUMERATOR_H

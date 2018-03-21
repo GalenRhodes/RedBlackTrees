@@ -1,0 +1,10 @@
+/****************************************************************************/
+/* Localization file */
+
+
+"CannotCompare" = "Unable to compare objects of types %1$@ and %2$@.";
+"KeyNull"       = "Key is null.";
+"ValNull"       = "Value is null.";
+"NoRotate"      = "Cannot rotate %1$@ - no %2$@ child node.";
+"left"          = "left";
+"right"         = "right";

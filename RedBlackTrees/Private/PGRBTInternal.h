@@ -1,6 +1,6 @@
 /*******************************************************************************************************************************************************************************//**
- *     PROJECT: RedBlackTrees
- *    FILENAME: RedBlackTrees.h
+ *     PROJECT: RedBlackTree
+ *    FILENAME: PGRBTInternal.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
  *        DATE: 3/13/18
@@ -16,12 +16,42 @@
  * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  **********************************************************************************************************************************************************************************/
 
+#ifndef _RedBlackTree_PGRBTInternal_H_
+#define _RedBlackTree_PGRBTInternal_H_
+
 #import <Cocoa/Cocoa.h>
+#import <objc/runtime.h>
 
-FOUNDATION_EXPORT const double        RedBlackTreesVersionNumber;
-FOUNDATION_EXPORT const unsigned char RedBlackTreesVersionString[];
+@class PGRBTNode;
 
-FOUNDATION_EXPORT NSString *const RedBlackTreesBundleName;
+NS_ASSUME_NONNULL_BEGIN
 
-#import "PGRBTNode.h"
-#import "PGRBTMap.h"
+NSComparisonResult PGCompareObjects(id object1, id object2);
+
+void decendInto(NSMutableArray<PGRBTNode *> *stack, PGRBTNode *_Nullable node, BOOL forward);
+
+/**
+ * This function is used to try to determine the most efficient stack size for enumerating over a reasonably well balanced
+ * tree without having to allocate too much memory or having the amount of memory expanded.
+ *
+ * @param count the number of items in the stack.
+ * @return the approximate size of stack needed.
+ */
+NS_INLINE NSUInteger estimateStackSize(NSUInteger count) {
+    NSUInteger bits = 1, match = 1;
+
+    while(match < count) {
+        match = (match << 1);
+        bits++;
+    }
+
+    return (bits + 2);
+}
+
+NS_INLINE NSComparisonResult PGInverseCompare(NSComparisonResult c) {
+    return ((c == NSOrderedSame) ? c : ((c == NSOrderedDescending) ? NSOrderedAscending : NSOrderedDescending));
+}
+
+NS_ASSUME_NONNULL_END
+
+#endif //_RedBlackTree_PGRBTInternal_H_

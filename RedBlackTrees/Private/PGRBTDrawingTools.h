@@ -1,14 +1,14 @@
 /*******************************************************************************************************************************************************************************//**
- *     PROJECT: RedBlackTrees
- *    FILENAME: RedBlackTrees.h
+ *     PROJECT: RedBlackTree
+ *    FILENAME: PGRBTDrawingTools.h
  *         IDE: AppCode
  *      AUTHOR: Galen Rhodes
- *        DATE: 3/13/18
+ *        DATE: 3/19/18
  *  VISIBILITY: Private
  *
- * Copyright © 2018 Project Galen. All rights reserved.
+  * Copyright © 2018 Project Galen. All rights reserved.
  *
- * Permission to use, copy, modify, and distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this
+  * Permission to use, copy, modify, and distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this
  * permission notice appear in all copies.
  *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO
@@ -16,12 +16,15 @@
  * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  **********************************************************************************************************************************************************************************/
 
-#import <Cocoa/Cocoa.h>
+#ifndef REDBLACKTREE_PGRBTDRAWINGTOOLS_H
+#define REDBLACKTREE_PGRBTDRAWINGTOOLS_H
 
-FOUNDATION_EXPORT const double        RedBlackTreesVersionNumber;
-FOUNDATION_EXPORT const unsigned char RedBlackTreesVersionString[];
+#import "RedBlackTrees.h"
 
-FOUNDATION_EXPORT NSString *const RedBlackTreesBundleName;
+NS_ASSUME_NONNULL_BEGIN
 
-#import "PGRBTNode.h"
-#import "PGRBTMap.h"
+void drawMyNodes(PGRBTNode *rootNode, NSString *filename);
+
+NS_ASSUME_NONNULL_END
+
+#endif //REDBLACKTREE_PGRBTDRAWINGTOOLS_H
