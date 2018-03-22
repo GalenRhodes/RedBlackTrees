@@ -15,7 +15,6 @@
 
 #import "PGRBTNode.h"
 #import "PGRBTInternal.h"
-#import "PGRBTDrawingTools.h"
 
 @implementation PGRBTNode {
     }
@@ -27,10 +26,6 @@
     @synthesize leftNode = _leftNode;
     @synthesize rightNode = _rightNode;
     @synthesize isRed = _isRed;
-#ifdef DEBUG
-    @synthesize rect = _rect;
-    @synthesize frect = _frect;
-#endif
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Woverriding-method-mismatch"
@@ -49,24 +44,10 @@
             _leftNode   = nil;
             _rightNode  = nil;
             _isRed      = YES;
-#ifdef DEBUG
-            _rect  = (NSRect *)calloc(1, sizeof(NSRect));
-            _frect = (NSRect *)calloc(1, sizeof(NSRect));
-            _rect->size.width = _rect->size.height = _frect->size.width = _frect->size.height = NODE_DIAM;
-#endif
         }
 
         return self;
     }
-
-#ifdef DEBUG
-
-    -(void)dealloc {
-        if(_rect) free(_rect);
-        if(_frect) free(_frect);
-    }
-
-#endif
 
     -(PGRBTNode *)_findNodeWithKey:(id)key comparator:(NSComparator)comparator {
         switch(comparator(self.key, key)) {
