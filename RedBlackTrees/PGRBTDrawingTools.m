@@ -22,13 +22,16 @@
  */
 #define PGBitsPerField   (8)
 #define PGFieldsPerPixel (4)
-#define PGBitsPerPixel   (PGBitsPerField + PGFieldsPerPixel)
+#define PGBitsPerPixel   (PGBitsPerField * PGFieldsPerPixel)
 
 NS_INLINE NSRect NSMakeRectOfSize(NSSize sz) {
-    NSRect r;
-    r.origin = NSZeroPoint;
-    r.size   = sz;
+    NSRect r = NSZeroRect;
+    r.size = sz;
     return r;
+}
+
+NS_INLINE NSRect NSMakeSquare(CGFloat sz) {
+    return NSMakeRectOfSize(NSMakeSize(sz, sz));
 }
 
 NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
@@ -36,6 +39,60 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
     CGFloat b1 = MAX(a, b);
     return (a1 + ((b1 - a1) * 0.5));
 }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Woverriding-method-mismatch"
+
+@implementation PGRBTDrawData {
+    }
+
+    @synthesize data = _data;
+    @synthesize nodeRect = _nodeRect;
+    @synthesize fullRect = _fullRect;
+
+    -(instancetype)initWithData:(id)data {
+        self = [super init];
+
+        if(self) {
+            _data     = data;
+            _nodeRect = (NSRectPointer)calloc(1, sizeof(NSRect));
+            _fullRect = (NSRectPointer)calloc(1, sizeof(NSRect));
+        }
+
+        return self;
+    }
+
+    -(void)dealloc {
+        if(_nodeRect) free(_nodeRect);
+        if(_fullRect) free(_fullRect);
+        _nodeRect = nil;
+        _fullRect = nil;
+        _data     = nil;
+    }
+
+    -(BOOL)isEqual:(id)other {
+        return (other && ((other == self) || ([other isKindOfClass:[self class]] && [self isEqualToData:other])));
+    }
+
+    -(BOOL)isEqualToData:(PGRBTDrawData *)drawData {
+        return (drawData && ((self == drawData) || ((self.data == nil) ? (drawData.data == nil) : [self.data isEqual:drawData.data])));
+    }
+
+    -(NSUInteger)hash {
+        return (31u + [self.data hash]);
+    }
+
+@end
+
+#pragma clang diagnostic pop
+
+@interface PGRBTDrawParams()
+
+    @property(nonatomic, readonly) CGFloat doubleMargin;
+    @property(nonatomic, readonly) CGFloat halfDiameter;
+    @property(nonatomic, readonly) CGFloat nodeDiameterWithMargin;
+
+@end
 
 @implementation PGRBTDrawParams {
         NSShadow     *_nodeShadow;
@@ -67,26 +124,26 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
         self = [super init];
 
         if(self) {
-            _pageMargin       = 10.0;
-            _deltaX           = 94.0;
-            _deltaY           = 75.0;
-            _nodeDiameter     = 75.0;
-            _nodeLineWidth    = 2.0;
-            _branchLineWidth  = 2.0;
-            _fontSize         = 50;
-            _fontYAdjust      = 9.0;
-            _fontName         = @"AmericanTypewriter";
-            _fontColor        = NSColor.whiteColor;
-            _redLineColor     = NSColor.blackColor;
-            _redFillColor     = NSColor.redColor;
-            _blackLineColor   = NSColor.yellowColor;
-            _blackFillColor   = NSColor.blackColor;
             _branchColor      = [NSColor colorWithCalibratedRed:0.32 green:0.8 blue:0.616 alpha:1];
+            _redFillColor     = NSColor.redColor;
+            _redLineColor     = NSColor.blackColor;
+            _blackFillColor   = NSColor.blackColor;
+            _blackLineColor   = NSColor.yellowColor;
             _shadowColor      = NSColor.blackColor;
             _pageColor        = NSColor.whiteColor;
+            _fontColor        = NSColor.whiteColor;
+            _fontName         = @"AmericanTypewriter";
+            _fontSize         = 50;
+            _fontYAdjust      = 9.0;
             _shadowBlurRadius = 4.0;
             _shadowOffsetX    = 2.1;
             _shadowOffsetY    = -2.1;
+            _nodeDiameter     = 75.0;
+            _nodeLineWidth    = 2.0;
+            _deltaX           = 94.0;
+            _deltaY           = 75.0;
+            _branchLineWidth  = 2.0;
+            _pageMargin       = 10.0;
         }
 
         return self;
@@ -96,11 +153,15 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
         return (self.nodeDiameter * 0.5);
     }
 
-    -(CGFloat)nodeDiameterWithMargin {
-        return (self.nodeDiameter + (self.pageMargin * 2.0));
+    -(CGFloat)doubleMargin {
+        return (self.pageMargin * 2.0);
     }
 
-    -(NSShadow *)nodeShadow {
+    -(CGFloat)nodeDiameterWithMargin {
+        return (self.nodeDiameter + self.doubleMargin);
+    }
+
+    -(void)nodeShadow {
         if(_nodeShadow == nil) {
             @synchronized(self) {
                 if(_nodeShadow == nil) {
@@ -111,10 +172,10 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
                 }
             }
         }
-        return _nodeShadow;
+        [_nodeShadow set];
     }
 
-    -(NSDictionary *)fontAttributes {
+    -(void)drawNodeText:(PGRBTNode<id, PGRBTDrawData *> *)node {
         if(_fontAttributes == nil) {
             @synchronized(self) {
                 if(_fontAttributes == nil) {
@@ -128,17 +189,13 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
                 }
             }
         }
-        return _fontAttributes;
-    }
 
-    -(void)drawNodeText:(PGRBTNode<id, PGRBTDrawData *> *)node {
         NSRect            rect         = *(node.value.nodeRect);
         NSString          *textContent = [(NSObject *)node.key description];
-        NSDictionary      *attrs       = self.fontAttributes;
         NSAffineTransform *tx          = [NSAffineTransform transform];
         CGFloat           h            = NSHeight(rect);
 
-        rect.size.height = NSHeight([textContent boundingRectWithSize:rect.size options:(NSStringDrawingUsesLineFragmentOrigin) attributes:attrs]);
+        rect.size.height = NSHeight([textContent boundingRectWithSize:rect.size options:(NSStringDrawingUsesLineFragmentOrigin) attributes:_fontAttributes]);
         rect.origin.y += ((h - NSHeight(rect)) * 0.5);
 
         [NSGraphicsContext saveGraphicsState];
@@ -146,7 +203,7 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
         [tx rotateByDegrees:180];
         [tx scaleXBy:-1.0 yBy:1.0];
         [tx concat];
-        [textContent drawInRect:NSMakeRectOfSize(rect.size) withAttributes:attrs];
+        [textContent drawInRect:NSMakeRectOfSize(rect.size) withAttributes:_fontAttributes];
         [NSGraphicsContext restoreGraphicsState];
     }
 
@@ -155,7 +212,7 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
         NSBezierPath *circlePath = [NSBezierPath bezierPathWithOvalInRect:nodeRect];
 
         [NSGraphicsContext saveGraphicsState];
-        [self.nodeShadow set];
+        [self nodeShadow];
         [(node.isRed ? self.redFillColor : self.blackFillColor) setFill];
         [(node.isRed ? self.redLineColor : self.blackLineColor) setStroke];
         [circlePath setLineWidth:self.nodeLineWidth];
@@ -175,7 +232,7 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
             NSBezierPath *linePath   = [NSBezierPath bezierPath];
 
             [NSGraphicsContext saveGraphicsState];
-            [self.nodeShadow set];
+            [self nodeShadow];
             [self.branchColor setStroke];
             [linePath moveToPoint:parentPoint];
             [linePath curveToPoint:childPoint controlPoint1:ctrlPoint controlPoint2:childPoint];
@@ -195,6 +252,14 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
         }
     }
 
+    -(void)fillRect:(NSRect)rect withColor:(NSColor *)color {
+        [NSGraphicsContext saveGraphicsState];
+        NSBezierPath *clr = [NSBezierPath bezierPathWithRect:rect];
+        [color setFill];
+        [clr fill];
+        [NSGraphicsContext restoreGraphicsState];
+    }
+
     -(NSRect)setNodeRectValues:(PGRBTNode<id, PGRBTDrawData *> *)node point:(NSPoint)nodePoint {
         if(node) {
             CGFloat d        = self.nodeDiameter;
@@ -206,7 +271,7 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
             if(node.leftNode) {
                 NSRect fullRectLeft = [self setNodeRectValues:node.leftNode point:nodePoint];
 
-                nodeRect.origin.x    = NSMaxX(fullRectLeft);
+                nodeRect.origin.x    = MAX(NSMaxX(fullRectLeft), NSMinX(fullRectLeft) + self.deltaX);
                 fullRect.size.width  = (NSMaxX(nodeRect) - NSMinX(fullRect));
                 fullRect.size.height = (NSMaxY(fullRectLeft) - NSMinY(fullRect));
             }
@@ -228,49 +293,11 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
         return NSZeroRect;
     }
 
-    -(void)drawNodes:(PGRBTNode<id, PGRBTDrawData *> *)rootNode filename:(NSString *const)filename error:(NSError **)error {
-        NSGraphicsContext *otx = [NSGraphicsContext currentContext];
-
-        if(rootNode) {
-            double mrgn = (self.pageMargin * 2.0);
-            NSRect rect = [self setNodeRectValues:rootNode point:NSZeroPoint];
-
-            rect.size.width += mrgn;
-            rect.size.height += mrgn;
-            NSLog(@"Bounds: { x = %0.3f; y = %0.3f; w = %0.3f; h = %0.3f; }", NSMinX(rect), NSMinY(rect), NSWidth(rect), NSHeight(rect));
-
-            NSBitmapImageRep  *img = [self createARGBImage:rect.size];
-            NSGraphicsContext *ctx = [NSGraphicsContext graphicsContextWithBitmapImageRep:img];
-            NSAffineTransform *tx  = [NSAffineTransform transform];
-
-            [NSGraphicsContext setCurrentContext:ctx];
-            [ctx setShouldAntialias:YES];
-            [self fillRect:rect withColor:self.pageColor];
-            [tx translateXBy:self.pageMargin yBy:(NSHeight(rect) - self.pageMargin)];
-            [tx scaleXBy:1.0 yBy:-1.0];
-            [tx concat];
-            [self drawNode:rootNode];
-            [ctx flushGraphics];
-            [self saveImage:img filename:filename error:error];
-        }
-        else {
-            // Nothing to do so just make a small blank image.
-            NSRect            rect = NSMakeRect(0, 0, self.nodeDiameterWithMargin, self.nodeDiameterWithMargin);
-            NSBitmapImageRep  *img = [self createARGBImage:rect.size];
-            NSGraphicsContext *ctx = [NSGraphicsContext graphicsContextWithBitmapImageRep:img];
-
-            [NSGraphicsContext setCurrentContext:ctx];
-            [self fillRect:rect withColor:self.pageColor];
-            [ctx flushGraphics];
-            [self saveImage:img filename:filename error:error];
-        }
-
-        [NSGraphicsContext setCurrentContext:otx];
-    }
-
     -(NSBitmapImageRep *)createARGBImage:(NSSize)size {
         NSInteger iWidth  = (NSInteger)ceil(size.width);
         NSInteger iHeight = (NSInteger)ceil(size.height);
+
+        NSLog(@"Creating an image: %lu x %lu", iWidth, iHeight);
 
         return [[NSBitmapImageRep alloc]
                                   initWithBitmapDataPlanes:NULL
@@ -294,56 +321,41 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
         return result;
     }
 
-    -(void)fillRect:(NSRect)rect withColor:(NSColor *)color {
-        [NSGraphicsContext saveGraphicsState];
-        NSBezierPath *clr = [NSBezierPath bezierPathWithRect:rect];
-        [color setFill];
-        [clr fill];
-        [NSGraphicsContext restoreGraphicsState];
+    -(NSRect)imageRectForRootNode:(PGRBTNode<id, PGRBTDrawData *> *)node {
+        NSRect rect = [self setNodeRectValues:node point:NSZeroPoint];
+        rect.size.width += self.doubleMargin;
+        rect.size.height += self.doubleMargin;
+        NSLog(@"Bounds: { x = %0.3f; y = %0.3f; w = %0.3f; h = %0.3f; }", NSMinX(rect), NSMinY(rect), NSWidth(rect), NSHeight(rect));
+        return rect;
     }
 
-@end
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Woverriding-method-mismatch"
-
-@implementation PGRBTDrawData {
+    -(void)setPageTransform:(NSRect)rect {
+        NSAffineTransform *tx = [NSAffineTransform transform];
+        [tx translateXBy:self.pageMargin yBy:(NSHeight(rect) - self.pageMargin)];
+        [tx scaleXBy:1.0 yBy:-1.0];
+        [tx concat];
     }
 
-    @synthesize data = _data;
-    @synthesize nodeRect = _nodeRect;
-    @synthesize fullRect = _fullRect;
+    -(void)drawNodes:(PGRBTNode<id, PGRBTDrawData *> *)rootNode filename:(NSString *const)filename error:(NSError **)error {
+        NSGraphicsContext *otx        = [NSGraphicsContext currentContext];
+        BOOL              doSomething = (rootNode != nil);
+        NSRect            rect        = (doSomething ? [self imageRectForRootNode:rootNode] : NSMakeSquare(self.nodeDiameterWithMargin));
+        NSBitmapImageRep  *img        = [self createARGBImage:rect.size];
+        NSGraphicsContext *ctx        = [NSGraphicsContext graphicsContextWithBitmapImageRep:img];
 
-    -(instancetype)initWithData:(id)data {
-        self = [super init];
+        [NSGraphicsContext setCurrentContext:ctx];
+        [self fillRect:rect withColor:self.pageColor];
 
-        if(self) {
-            _data     = data;
-            _nodeRect = (NSRectPointer)calloc(1, sizeof(NSRect));
-            _fullRect = (NSRectPointer)calloc(1, sizeof(NSRect));
+        if(rootNode) {
+            [ctx setShouldAntialias:YES];
+            [self setPageTransform:rect];
+            [self drawNode:rootNode];
         }
 
-        return self;
-    }
-
-    -(void)dealloc {
-        if(_nodeRect) free(_nodeRect);
-        if(_fullRect) free(_fullRect);
-    }
-
-    -(BOOL)isEqual:(id)other {
-        return (other && ((other == self) || ([other isKindOfClass:[self class]] && [self isEqualToData:other])));
-    }
-
-    -(BOOL)isEqualToData:(PGRBTDrawData *)drawData {
-        return (drawData && ((self == drawData) || ((self.data == nil) ? (drawData.data == nil) : [self.data isEqual:drawData.data])));
-    }
-
-    -(NSUInteger)hash {
-        return (31u + [self.data hash]);
+        [ctx flushGraphics];
+        [self saveImage:img filename:filename error:error];
+        [NSGraphicsContext setCurrentContext:otx];
     }
 
 @end
-
-#pragma clang diagnostic pop
 
