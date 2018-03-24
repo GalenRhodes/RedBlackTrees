@@ -205,8 +205,11 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
         rect.size.height = NSHeight([textContent boundingRectWithSize:rect.size options:(NSStringDrawingUsesLineFragmentOrigin) attributes:_fontAttributes]);
         rect.origin.y += ((h - NSHeight(rect)) * 0.5);
 
+        NSLog(@"h = %0.3f; height = %0.3f; y = %0.3f; key = \"%@\"", h, NSHeight(rect), NSMinY(rect), textContent);
+
+        NSFont *font = (NSFont *)_fontAttributes[NSFontAttributeName];
         [NSGraphicsContext saveGraphicsState];
-        [tx translateXBy:NSMinX(rect) yBy:NSMinY(rect) + self.nodeDiameter + ((NSFont *)_fontAttributes[NSFontAttributeName]).descender];
+        [tx translateXBy:NSMinX(rect) yBy:NSMinY(rect) + self.nodeDiameter + font.descender];
         [tx rotateByDegrees:180];
         [tx scaleXBy:-1.0 yBy:1.0];
         [tx concat];
