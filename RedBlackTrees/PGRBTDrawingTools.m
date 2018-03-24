@@ -133,17 +133,17 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
             _pageColor        = NSColor.whiteColor;
             _fontColor        = NSColor.whiteColor;
             _fontName         = @"AmericanTypewriter";
-            _fontSize         = 50;
-            _fontYAdjust      = 9.0;
-            _shadowBlurRadius = 4.0;
-            _shadowOffsetX    = 2.1;
-            _shadowOffsetY    = -2.1;
-            _nodeDiameter     = 75.0;
-            _nodeLineWidth    = 2.0;
-            _deltaX           = 94.0;
-            _deltaY           = 75.0;
-            _branchLineWidth  = 2.0;
-            _pageMargin       = 10.0;
+            _fontSize         = 140;
+            _fontYAdjust      = 25.0;
+            _shadowBlurRadius = 10.0;
+            _shadowOffsetX    = 9.1;
+            _shadowOffsetY    = -9.1;
+            _nodeDiameter     = 200.0;
+            _nodeLineWidth    = 7.0;
+            _deltaX           = 250.0;
+            _deltaY           = 200.0;
+            _branchLineWidth  = 7.0;
+            _pageMargin       = 50.0;
         }
 
         return self;
@@ -180,11 +180,18 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
             @synchronized(self) {
                 if(_fontAttributes == nil) {
                     NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
+                    NSFont                  *font  = [NSFont fontWithName:self.fontName size:self.fontSize];
+
+                    NSLog(@"Font Descender: %@", @(font.descender));
+                    NSLog(@" Font Ascender: %@", @(font.ascender));
+                    NSLog(@"Font capHeight: %@", @(font.capHeight));
+                    NSLog(@"  Font xHeight: %@", @(font.xHeight));
+
                     style.alignment = NSTextAlignmentCenter;
                     _fontAttributes = @{
-                            NSFontAttributeName           : [NSFont fontWithName:self.fontName size:self.fontSize], // Font Face
-                            NSForegroundColorAttributeName: self.fontColor, //                                         Font Color
-                            NSParagraphStyleAttributeName : style //                                                   Font Style
+                            NSFontAttributeName           : font, //           Font Face
+                            NSForegroundColorAttributeName: self.fontColor, // Font Color
+                            NSParagraphStyleAttributeName : style //           Font Style
                     };
                 }
             }
@@ -199,7 +206,7 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
         rect.origin.y += ((h - NSHeight(rect)) * 0.5);
 
         [NSGraphicsContext saveGraphicsState];
-        [tx translateXBy:NSMinX(rect) yBy:NSMinY(rect) + self.nodeDiameter - self.fontYAdjust];
+        [tx translateXBy:NSMinX(rect) yBy:NSMinY(rect) + self.nodeDiameter + ((NSFont *)_fontAttributes[NSFontAttributeName]).descender];
         [tx rotateByDegrees:180];
         [tx scaleXBy:-1.0 yBy:1.0];
         [tx concat];
@@ -212,11 +219,13 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
         NSBezierPath *circlePath = [NSBezierPath bezierPathWithOvalInRect:nodeRect];
 
         [NSGraphicsContext saveGraphicsState];
+        [NSGraphicsContext saveGraphicsState];
         [self nodeShadow];
         [(node.isRed ? self.redFillColor : self.blackFillColor) setFill];
+        [circlePath fill];
+        [NSGraphicsContext restoreGraphicsState];
         [(node.isRed ? self.redLineColor : self.blackLineColor) setStroke];
         [circlePath setLineWidth:self.nodeLineWidth];
-        [circlePath fill];
         [circlePath stroke];
         [NSGraphicsContext restoreGraphicsState];
     }
@@ -271,7 +280,7 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
             if(node.leftNode) {
                 NSRect fullRectLeft = [self setNodeRectValues:node.leftNode point:nodePoint];
 
-                nodeRect.origin.x    = MAX(NSMaxX(fullRectLeft), NSMinX(fullRectLeft) + self.deltaX);
+                nodeRect.origin.x = MAX(NSMaxX(fullRectLeft), NSMinX(fullRectLeft) + self.deltaX);
                 fullRect.size.width  = (NSMaxX(nodeRect) - NSMinX(fullRect));
                 fullRect.size.height = (NSMaxY(fullRectLeft) - NSMinY(fullRect));
             }

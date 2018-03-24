@@ -27,7 +27,7 @@ int main(int argc, const char *argv[]) {
             NSLog(@"%2d> \"%s\"", i, argv[i]);
         }
 
-        NSString     *filePath  = [[[NSString stringWithUTF8String:argv[1]] stringByExpandingTildeInPath] stringByAppendingString:@"/PostInsert-%03lu.png"];
+        NSString     *filePath  = [[[NSString stringWithUTF8String:argv[1]] stringByExpandingTildeInPath] stringByAppendingString:@"/%@-%03lu.png"];
         NSString     *chs       = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         NSString     *t         = chs;
         NSUInteger   cnt        = chs.length;
@@ -46,15 +46,47 @@ int main(int argc, const char *argv[]) {
             else {
                 NSUInteger idx = (NSUInteger)floor(drand() * t.length);
                 NSString   *s  = [t substringWithRange:NSMakeRange(idx, 1)];
+
                 t = [NSString stringWithFormat:@"%@%@", [t substringToIndex:idx], [t substringFromIndex:(idx + 1)]];
                 [map insertValue:[[PGRBTDrawData alloc] initWithData:s] forKey:s];
             }
         }
 
         NSError  *error    = nil;
-        NSString *filename = [NSString stringWithFormat:filePath, ++inum];
+        NSString *filename = [NSString stringWithFormat:filePath, @"PostInsert", ++inum];
         [[[PGRBTDrawParams alloc] init] drawNodes:map.root filename:filename error:&error];
         if(error) NSLog(@"ERROR: %@", [error description]);
+
+        NSUInteger z = (NSUInteger)floor((double)cnt * (2.0 / 3.0));
+        NSLog(@"Deleting %lu items:", z);
+
+        t = chs;
+        for(NSUInteger i = 0, j = z; i < j; i++) {
+            NSUInteger k  = (NSUInteger)floor(drand() * t.length);
+            NSString   *s = [t substringWithRange:NSMakeRange(k, 1)];
+
+            t = [NSString stringWithFormat:@"%@%@", [t substringToIndex:k], [t substringFromIndex:(k + 1)]];
+            [map removeValueForKey:s];
+            NSLog(@"\t\"%@\"", s);
+        }
+
+        filename = [NSString stringWithFormat:filePath, @"PostDelete", inum];
+        [[[PGRBTDrawParams alloc] init] drawNodes:map.root filename:filename error:&error];
+        if(error) NSLog(@"ERROR: %@", [error description]);
+
+        BOOL r = YES;
+        NSLog(@"%@", @"Checking Results....");
+        // Check our work...
+        for(NSUInteger i = 0, j = t.length; i < j; i++) {
+            NSString                  *s    = [t substringWithRange:NSMakeRange(i, 1)];
+            PGRBTDrawData<NSString *> *data = map[s];
+            BOOL                      b     = [s isEqualToString:data.data];
+
+            NSLog(@"\t\"%@\" = \"%@\": %@", s, data.data, (b ? @"✅" : @"⛔️"));
+            r = (r & b);
+        }
+
+        NSLog(@"RESULT: %@", (r ? @"✅" : @"⛔️"));
     }
 
     return 0;
