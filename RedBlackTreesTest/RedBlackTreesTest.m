@@ -34,7 +34,11 @@ int main(int argc, const char *argv[]) {
         NSUInteger   inum       = 0;
         NSComparator comparator = ^NSComparisonResult(id obj1, id obj2) { return [(NSString *)obj1 compare:(NSString *)obj2]; };
 
-        PGRBTMap<NSString *, PGRBTDrawData<NSString *> *> *map = [[PGRBTMap alloc] initWithComparator:comparator];
+        PGRBTMap<NSString *, PGRBTDrawData<NSString *> *> *map  = [[PGRBTMap alloc] initWithComparator:comparator];
+        PGRBTDrawParams                                   *draw = [[PGRBTDrawParams alloc] init];
+
+        draw.fontName    = @"Luminari";
+        draw.fontYAdjust = 0;
 
         srand((unsigned int)time(0));
 
@@ -54,7 +58,7 @@ int main(int argc, const char *argv[]) {
 
         NSError  *error    = nil;
         NSString *filename = [NSString stringWithFormat:filePath, @"PostInsert", ++inum];
-        [[[PGRBTDrawParams alloc] init] drawNodes:map.root filename:filename error:&error];
+        [draw drawNodes:map.root filename:filename error:&error];
         if(error) NSLog(@"ERROR: %@", [error description]);
 
         NSUInteger z = (NSUInteger)floor((double)cnt * (2.0 / 3.0));
@@ -71,7 +75,7 @@ int main(int argc, const char *argv[]) {
         }
 
         filename = [NSString stringWithFormat:filePath, @"PostDelete", inum];
-        [[[PGRBTDrawParams alloc] init] drawNodes:map.root filename:filename error:&error];
+        [draw drawNodes:map.root filename:filename error:&error];
         if(error) NSLog(@"ERROR: %@", [error description]);
 
         BOOL r = YES;

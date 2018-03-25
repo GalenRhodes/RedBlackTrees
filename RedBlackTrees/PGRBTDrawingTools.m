@@ -133,17 +133,17 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
             _pageColor        = NSColor.whiteColor;
             _fontColor        = NSColor.whiteColor;
             _fontName         = @"AmericanTypewriter";
-            _fontSize         = 140;
-            _fontYAdjust      = 25.0;
-            _shadowBlurRadius = 10.0;
-            _shadowOffsetX    = 9.1;
-            _shadowOffsetY    = -9.1;
-            _nodeDiameter     = 200.0;
-            _nodeLineWidth    = 7.0;
-            _deltaX           = 250.0;
-            _deltaY           = 200.0;
-            _branchLineWidth  = 7.0;
-            _pageMargin       = 50.0;
+            _fontSize         = 50;
+            _fontYAdjust      = 6.0;
+            _shadowBlurRadius = 4.0;
+            _shadowOffsetX    = 2.1;
+            _shadowOffsetY    = -2.1;
+            _nodeDiameter     = 75.0;
+            _nodeLineWidth    = 2.0;
+            _deltaX           = 95.0;
+            _deltaY           = 75.0;
+            _branchLineWidth  = 2.0;
+            _pageMargin       = 10.0;
         }
 
         return self;
@@ -176,17 +176,13 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
     }
 
     -(void)drawNodeText:(PGRBTNode<id, PGRBTDrawData *> *)node {
+        static BOOL printIt = YES;
+
         if(_fontAttributes == nil) {
             @synchronized(self) {
                 if(_fontAttributes == nil) {
                     NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
                     NSFont                  *font  = [NSFont fontWithName:self.fontName size:self.fontSize];
-
-                    NSLog(@"Font Descender: %@", @(font.descender));
-                    NSLog(@" Font Ascender: %@", @(font.ascender));
-                    NSLog(@"Font capHeight: %@", @(font.capHeight));
-                    NSLog(@"  Font xHeight: %@", @(font.xHeight));
-
                     style.alignment = NSTextAlignmentCenter;
                     _fontAttributes = @{
                             NSFontAttributeName           : font, //           Font Face
@@ -197,23 +193,35 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
             }
         }
 
-        NSRect            rect         = *(node.value.nodeRect);
+        NSFont            *font        = (NSFont *)_fontAttributes[NSFontAttributeName];
         NSString          *textContent = [(NSObject *)node.key description];
         NSAffineTransform *tx          = [NSAffineTransform transform];
-        CGFloat           h            = NSHeight(rect);
+        NSRect            rect         = *(node.value.nodeRect);
+        CGFloat           halfh        = NSHeight(rect);
+
+        if(printIt) {
+            printIt = NO;
+
+            NSLog(@"FONT: x-Height: %0.3f; ascent: %0.3f; descent: %0.3f; cap-height: %0.3f; total: %0.3f",
+                  font.xHeight,
+                  font.ascender,
+                  font.descender,
+                  font.capHeight,
+                  (font.ascender - font.descender));
+
+            NSRect r = [textContent boundingRectWithSize:rect.size options:NSStringDrawingUsesLineFragmentOrigin attributes:_fontAttributes];
+            NSLog(@"Given Size: %@", NSStringFromSize(rect.size));
+            NSLog(@"Resut Rect: %@", NSStringFromRect(r));
+        }
 
         rect.size.height = NSHeight([textContent boundingRectWithSize:rect.size options:(NSStringDrawingUsesLineFragmentOrigin) attributes:_fontAttributes]);
-        rect.origin.y += ((h - NSHeight(rect)) * 0.5);
+        rect.origin.y += ((halfh - NSHeight(rect)) * 0.5);
 
-        NSLog(@"h = %0.3f; height = %0.3f; y = %0.3f; key = \"%@\"", h, NSHeight(rect), NSMinY(rect), textContent);
-
-        NSFont *font = (NSFont *)_fontAttributes[NSFontAttributeName];
         [NSGraphicsContext saveGraphicsState];
-        [tx translateXBy:NSMinX(rect) yBy:NSMinY(rect) + self.nodeDiameter + font.descender];
-        [tx rotateByDegrees:180];
-        [tx scaleXBy:-1.0 yBy:1.0];
+        [tx translateXBy:NSMinX(rect) yBy:NSMinY(rect)];
+        [tx scaleXBy:1.0 yBy:-1.0];
         [tx concat];
-        [textContent drawInRect:NSMakeRectOfSize(rect.size) withAttributes:_fontAttributes];
+        [textContent drawInRect:NSMakeRect(0, (0 - self.nodeDiameter - self.fontYAdjust), NSWidth(rect), NSHeight(rect)) withAttributes:_fontAttributes];
         [NSGraphicsContext restoreGraphicsState];
     }
 
@@ -262,6 +270,15 @@ NS_INLINE CGFloat findCenterBetween(CGFloat a, CGFloat b) {
             [self drawNodeBody:node];
             [self drawNodeText:node];
         }
+    }
+
+    -(void)drawRect:(NSRect)rect withColor:(NSColor *)color {
+        [NSGraphicsContext saveGraphicsState];
+        NSBezierPath *clr = [NSBezierPath bezierPathWithRect:rect];
+        [color setStroke];
+        [clr setLineWidth:self.nodeLineWidth];
+        [clr stroke];
+        [NSGraphicsContext restoreGraphicsState];
     }
 
     -(void)fillRect:(NSRect)rect withColor:(NSColor *)color {
