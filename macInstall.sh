@@ -24,13 +24,29 @@
 
 PDIR=$(dirname $(readlink -f "$0"))
 PROJECT=`find "${PDIR}" -name "*.xcodeproj" -exec basename -s .xcodeproj {} \;`
+DSTROOT="${PDIR}/Release"
+LIB_INSTALL_PATH="lib"
+PUBLIC_HEADERS_FOLDER_PATH="include"
+FRAMEWORK_INSTALL_PATH="Frameworks"
 
-echo "Project Directory: \"${PDIR}\""
-echo "     Project Name: \"${PROJECT}\""
 
-pushd "${PDIR}"
-rm -fr "${HOME}/Library/Frameworks/${PROJECT}.framework"
-xcodebuild -project "${PROJECT}.xcodeproj" -target "${PROJECT}" -configuration Release clean build install DSTROOT="${HOME}/" SKIP_INSTALL=No
+echo "     Project Directory: \"${PDIR}\""
+echo "          Project Name: \"${PROJECT}\""
+echo "               DSTROOT: \"${DSTROOT}\""
+echo "  Library Install Path: \"${DSTROOT}/${LIB_INSTALL_PATH}\""
+echo "  Headers Install Path: \"${DSTROOT}/${PUBLIC_HEADERS_FOLDER_PATH}\""
+echo "Framework Install Path: \"${DSTROOT}/${FRAMEWORK_INSTALL_PATH}\""
+
+rm -fr "${DSTROOT}"
+mkdir -p "${DSTROOT}/${LIB_INSTALL_PATH}"
+mkdir -p "${DSTROOT}/${FRAMEWORK_INSTALL_PATH}"
+
+xcodebuild -project "${PROJECT}.xcodeproj" -target "${PROJECT}" -configuration Release \
+    clean build install DSTROOT="${DSTROOT}/" INSTALL_PATH="/${LIB_INSTALL_PATH}" \
+    PUBLIC_HEADERS_FOLDER_PATH="/${PUBLIC_HEADERS_FOLDER_PATH}" SKIP_INSTALL=No > "${DSTROOT}/${PROJECT}.log"
+
+xcodebuild -project "${PROJECT}.xcodeproj" -target "${PROJECT}Framework" -configuration Release \
+    clean build install DSTROOT="${DSTROOT}/" INSTALL_PATH="/${FRAMEWORK_INSTALL_PATH}" SKIP_INSTALL=No > "${DSTROOT}/${PROJECT}Framework.log"
+
 res="$?"
-popd
 exit "${res}"

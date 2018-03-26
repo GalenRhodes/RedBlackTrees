@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		1117D151302E721C0610ABC0 /* PGRBTEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DF6E9DEDC6FB80BD82CE /* PGRBTEnumerator.h */; };
-		1117D4C46A72D3330CDED653 /* PGRBTDrawingTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D8F6F452502BAA07A818 /* PGRBTDrawingTools.h */; };
-		1117D533D878B64743736D19 /* PGRBTMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DA0491941D65EE157A35 /* PGRBTMap.h */; };
+		1117D4C46A72D3330CDED653 /* PGRBTDrawingTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D8F6F452502BAA07A818 /* PGRBTDrawingTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1117D533D878B64743736D19 /* PGRBTMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DA0491941D65EE157A35 /* PGRBTMap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117D56E939835C4D1162749 /* PGRBTMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DD76A280BA4524330C9F /* PGRBTMap.m */; };
 		1117D62B8A624DB5474D2087 /* PGRBTInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D97E677F5992CBB67F67 /* PGRBTInternal.m */; };
 		1117D6A0661C181945502821 /* PGRBTDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D118D485489F84B38827 /* PGRBTDrawingTools.m */; };
 		1117D8ABDFE9C1BCAB7461A3 /* PGRBTInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D1039074C557CC2ED035 /* PGRBTInternal.h */; };
-		1117DA198F0514536325E850 /* PGRBTNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D42CF306F40BC02F2AEC /* PGRBTNode.h */; };
+		1117DA198F0514536325E850 /* PGRBTNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D42CF306F40BC02F2AEC /* PGRBTNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1117DB37B2DDBB584AFAC2F8 /* PGRBTEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D93B1DB53080086CA810 /* PGRBTEnumerator.m */; };
 		1117DEC04297637FD0F5C7A9 /* PGRBTNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D271EEF07795ED8F66FA /* PGRBTNode.m */; };
-		83381A432062DC8500EC3526 /* RedBlackTrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 83381A422062DC8500EC3526 /* RedBlackTrees.h */; };
+		83381A432062DC8500EC3526 /* RedBlackTrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 83381A422062DC8500EC3526 /* RedBlackTrees.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83381A452062DC8500EC3526 /* RedBlackTrees.m in Sources */ = {isa = PBXBuildFile; fileRef = 83381A442062DC8500EC3526 /* RedBlackTrees.m */; };
 		83D7831420656484007C8B08 /* RedBlackTreesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D7831320656484007C8B08 /* RedBlackTreesTest.m */; };
 		83D7831B206564A5007C8B08 /* libRedBlackTrees.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 83381A3F2062DC8400EC3526 /* libRedBlackTrees.dylib */; };
-		83DA75892067F57200570D3D /* RedBlackTreesFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 83DA75872067F57200570D3D /* RedBlackTreesFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83DA75892067F57200570D3D /* RedBlackTrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 83DA75872067F57200570D3D /* RedBlackTrees.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83DA758D2067F60300570D3D /* PGRBTMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DD76A280BA4524330C9F /* PGRBTMap.m */; };
 		83DA758E2067F61800570D3D /* PGRBTNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D271EEF07795ED8F66FA /* PGRBTNode.m */; };
 		83DA758F2067F61800570D3D /* PGRBTEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D93B1DB53080086CA810 /* PGRBTEnumerator.m */; };
@@ -77,8 +77,8 @@
 		83381A442062DC8500EC3526 /* RedBlackTrees.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedBlackTrees.m; sourceTree = "<group>"; };
 		83D7831120656484007C8B08 /* RedBlackTreesTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RedBlackTreesTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D7831320656484007C8B08 /* RedBlackTreesTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedBlackTreesTest.m; sourceTree = "<group>"; };
-		83DA75852067F57200570D3D /* RedBlackTreesFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RedBlackTreesFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		83DA75872067F57200570D3D /* RedBlackTreesFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedBlackTreesFramework.h; sourceTree = "<group>"; };
+		83DA75852067F57200570D3D /* RedBlackTrees.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RedBlackTrees.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83DA75872067F57200570D3D /* RedBlackTrees.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedBlackTrees.h; sourceTree = "<group>"; };
 		83DA75882067F57200570D3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,7 +147,7 @@
 			children = (
 				83381A3F2062DC8400EC3526 /* libRedBlackTrees.dylib */,
 				83D7831120656484007C8B08 /* RedBlackTreesTest */,
-				83DA75852067F57200570D3D /* RedBlackTreesFramework.framework */,
+				83DA75852067F57200570D3D /* RedBlackTrees.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -187,7 +187,7 @@
 		83DA75862067F57200570D3D /* RedBlackTreesFramework */ = {
 			isa = PBXGroup;
 			children = (
-				83DA75872067F57200570D3D /* RedBlackTreesFramework.h */,
+				83DA75872067F57200570D3D /* RedBlackTrees.h */,
 				83DA75882067F57200570D3D /* Info.plist */,
 			);
 			path = RedBlackTreesFramework;
@@ -203,9 +203,9 @@
 				83381A432062DC8500EC3526 /* RedBlackTrees.h in Headers */,
 				1117D533D878B64743736D19 /* PGRBTMap.h in Headers */,
 				1117DA198F0514536325E850 /* PGRBTNode.h in Headers */,
+				1117D4C46A72D3330CDED653 /* PGRBTDrawingTools.h in Headers */,
 				1117D151302E721C0610ABC0 /* PGRBTEnumerator.h in Headers */,
 				1117D8ABDFE9C1BCAB7461A3 /* PGRBTInternal.h in Headers */,
-				1117D4C46A72D3330CDED653 /* PGRBTDrawingTools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +213,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83DA75892067F57200570D3D /* RedBlackTreesFramework.h in Headers */,
+				83DA75892067F57200570D3D /* RedBlackTrees.h in Headers */,
 				83DA75922067F63A00570D3D /* PGRBTMap.h in Headers */,
 				83DA75932067F63A00570D3D /* PGRBTNode.h in Headers */,
 				83DA75942067F63A00570D3D /* PGRBTDrawingTools.h in Headers */,
@@ -275,7 +275,7 @@
 			);
 			name = RedBlackTreesFramework;
 			productName = RedBlackTreesFramework;
-			productReference = 83DA75852067F57200570D3D /* RedBlackTreesFramework.framework */;
+			productReference = 83DA75852067F57200570D3D /* RedBlackTrees.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -426,6 +426,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-fobjc-arc-exceptions";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -474,6 +475,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "-fobjc-arc-exceptions";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -486,7 +488,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
-				OTHER_CFLAGS = "-fobjc-arc-exceptions";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -500,7 +501,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
 				GCC_OPTIMIZATION_LEVEL = fast;
-				OTHER_CFLAGS = "-fobjc-arc-exceptions";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -542,9 +542,8 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				OTHER_CFLAGS = "-fobjc-arc-exceptions";
-				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.RedBlackTreesFramework;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.RedBlackTrees;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -569,9 +568,8 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				OTHER_CFLAGS = "-fobjc-arc-exceptions";
-				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.RedBlackTreesFramework;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.projectgalen.RedBlackTrees;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
