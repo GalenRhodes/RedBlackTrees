@@ -42,11 +42,18 @@ mkdir -p "${DSTROOT}/${LIB_INSTALL_PATH}"
 mkdir -p "${DSTROOT}/${FRAMEWORK_INSTALL_PATH}"
 
 xcodebuild -project "${PROJECT}.xcodeproj" -target "${PROJECT}" -configuration Release \
-    clean build install DSTROOT="${DSTROOT}/" INSTALL_PATH="/${LIB_INSTALL_PATH}" \
-    PUBLIC_HEADERS_FOLDER_PATH="/${PUBLIC_HEADERS_FOLDER_PATH}" SKIP_INSTALL=No > "${DSTROOT}/${PROJECT}.log"
+    clean build install DSTROOT="${DSTROOT}/" INSTALL_PATH="/${LIB_INSTALL_PATH}/dynamic" \
+    PUBLIC_HEADERS_FOLDER_PATH="/${PUBLIC_HEADERS_FOLDER_PATH}" SKIP_INSTALL=No \
+    > "${DSTROOT}/${PROJECT}dynamic.log"
+
+xcodebuild -project "${PROJECT}.xcodeproj" -target "${PROJECT}Static" -configuration Release \
+    clean build install DSTROOT="${DSTROOT}/" INSTALL_PATH="/${LIB_INSTALL_PATH}/static" \
+    PUBLIC_HEADERS_FOLDER_PATH="/${PUBLIC_HEADERS_FOLDER_PATH}" SKIP_INSTALL=No \
+    > "${DSTROOT}/${PROJECT}static.log"
 
 xcodebuild -project "${PROJECT}.xcodeproj" -target "${PROJECT}Framework" -configuration Release \
-    clean build install DSTROOT="${DSTROOT}/" INSTALL_PATH="/${FRAMEWORK_INSTALL_PATH}" SKIP_INSTALL=No > "${DSTROOT}/${PROJECT}Framework.log"
+    clean build install DSTROOT="${DSTROOT}/" INSTALL_PATH="/${FRAMEWORK_INSTALL_PATH}" SKIP_INSTALL=No \
+    > "${DSTROOT}/${PROJECT}Framework.log"
 
 res="$?"
 exit "${res}"

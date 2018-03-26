@@ -19,6 +19,18 @@
 		1117DEC04297637FD0F5C7A9 /* PGRBTNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D271EEF07795ED8F66FA /* PGRBTNode.m */; };
 		83381A432062DC8500EC3526 /* RedBlackTrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 83381A422062DC8500EC3526 /* RedBlackTrees.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83381A452062DC8500EC3526 /* RedBlackTrees.m in Sources */ = {isa = PBXBuildFile; fileRef = 83381A442062DC8500EC3526 /* RedBlackTrees.m */; };
+		8397790F20697640007D3746 /* RedBlackTrees.m in Sources */ = {isa = PBXBuildFile; fileRef = 83381A442062DC8500EC3526 /* RedBlackTrees.m */; };
+		8397791020697640007D3746 /* PGRBTMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117DD76A280BA4524330C9F /* PGRBTMap.m */; };
+		8397791120697640007D3746 /* PGRBTNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D271EEF07795ED8F66FA /* PGRBTNode.m */; };
+		8397791220697640007D3746 /* PGRBTEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D93B1DB53080086CA810 /* PGRBTEnumerator.m */; };
+		8397791320697640007D3746 /* PGRBTInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D97E677F5992CBB67F67 /* PGRBTInternal.m */; };
+		8397791420697640007D3746 /* PGRBTDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 1117D118D485489F84B38827 /* PGRBTDrawingTools.m */; };
+		8397791520697659007D3746 /* RedBlackTrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 83381A422062DC8500EC3526 /* RedBlackTrees.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8397791620697659007D3746 /* PGRBTMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DA0491941D65EE157A35 /* PGRBTMap.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8397791720697659007D3746 /* PGRBTNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D42CF306F40BC02F2AEC /* PGRBTNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8397791820697659007D3746 /* PGRBTEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117DF6E9DEDC6FB80BD82CE /* PGRBTEnumerator.h */; };
+		8397791920697659007D3746 /* PGRBTInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D1039074C557CC2ED035 /* PGRBTInternal.h */; };
+		8397791A20697659007D3746 /* PGRBTDrawingTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 1117D8F6F452502BAA07A818 /* PGRBTDrawingTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83D7831420656484007C8B08 /* RedBlackTreesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83D7831320656484007C8B08 /* RedBlackTreesTest.m */; };
 		83D7831B206564A5007C8B08 /* libRedBlackTrees.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 83381A3F2062DC8400EC3526 /* libRedBlackTrees.dylib */; };
 		83DA75892067F57200570D3D /* RedBlackTrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 83DA75872067F57200570D3D /* RedBlackTrees.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -75,6 +87,7 @@
 		83381A3F2062DC8400EC3526 /* libRedBlackTrees.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libRedBlackTrees.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		83381A422062DC8500EC3526 /* RedBlackTrees.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedBlackTrees.h; sourceTree = "<group>"; };
 		83381A442062DC8500EC3526 /* RedBlackTrees.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedBlackTrees.m; sourceTree = "<group>"; };
+		83977906206975D5007D3746 /* libRedBlackTrees.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRedBlackTrees.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D7831120656484007C8B08 /* RedBlackTreesTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RedBlackTreesTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D7831320656484007C8B08 /* RedBlackTreesTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedBlackTreesTest.m; sourceTree = "<group>"; };
 		83DA75852067F57200570D3D /* RedBlackTrees.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RedBlackTrees.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +97,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		83381A3C2062DC8400EC3526 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83977903206975D5007D3746 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -136,6 +156,7 @@
 				83381A412062DC8400EC3526 /* RedBlackTrees */,
 				83D7831220656484007C8B08 /* RedBlackTreesTest */,
 				83DA75862067F57200570D3D /* RedBlackTreesFramework */,
+				83977907206975D5007D3746 /* RedBlackTreesStatic */,
 				83381A402062DC8400EC3526 /* Products */,
 				1117D1A3937CFB1F60132780 /* SupportingFiles */,
 				83D7831A206564A5007C8B08 /* Frameworks */,
@@ -148,6 +169,7 @@
 				83381A3F2062DC8400EC3526 /* libRedBlackTrees.dylib */,
 				83D7831120656484007C8B08 /* RedBlackTreesTest */,
 				83DA75852067F57200570D3D /* RedBlackTrees.framework */,
+				83977906206975D5007D3746 /* libRedBlackTrees.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,6 +189,13 @@
 				1117D118D485489F84B38827 /* PGRBTDrawingTools.m */,
 			);
 			path = RedBlackTrees;
+			sourceTree = "<group>";
+		};
+		83977907206975D5007D3746 /* RedBlackTreesStatic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RedBlackTreesStatic;
 			sourceTree = "<group>";
 		};
 		83D7831220656484007C8B08 /* RedBlackTreesTest */ = {
@@ -209,6 +238,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		83977904206975D5007D3746 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8397791520697659007D3746 /* RedBlackTrees.h in Headers */,
+				8397791620697659007D3746 /* PGRBTMap.h in Headers */,
+				8397791720697659007D3746 /* PGRBTNode.h in Headers */,
+				8397791A20697659007D3746 /* PGRBTDrawingTools.h in Headers */,
+				8397791820697659007D3746 /* PGRBTEnumerator.h in Headers */,
+				8397791920697659007D3746 /* PGRBTInternal.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		83DA75822067F57200570D3D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,6 +283,23 @@
 			productName = RedBlackTrees;
 			productReference = 83381A3F2062DC8400EC3526 /* libRedBlackTrees.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
+		};
+		83977905206975D5007D3746 /* RedBlackTreesStatic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8397790C206975D6007D3746 /* Build configuration list for PBXNativeTarget "RedBlackTreesStatic" */;
+			buildPhases = (
+				83977902206975D5007D3746 /* Sources */,
+				83977903206975D5007D3746 /* Frameworks */,
+				83977904206975D5007D3746 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RedBlackTreesStatic;
+			productName = RedBlackTreesStatic;
+			productReference = 83977906206975D5007D3746 /* libRedBlackTrees.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 		83D7831020656484007C8B08 /* RedBlackTreesTest */ = {
 			isa = PBXNativeTarget;
@@ -291,6 +350,10 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
+					83977905206975D5007D3746 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					83D7831020656484007C8B08 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -314,8 +377,9 @@
 			projectRoot = "";
 			targets = (
 				83381A3E2062DC8400EC3526 /* RedBlackTrees */,
-				83D7831020656484007C8B08 /* RedBlackTreesTest */,
+				83977905206975D5007D3746 /* RedBlackTreesStatic */,
 				83DA75842067F57200570D3D /* RedBlackTreesFramework */,
+				83D7831020656484007C8B08 /* RedBlackTreesTest */,
 			);
 		};
 /* End PBXProject section */
@@ -341,6 +405,19 @@
 				1117DB37B2DDBB584AFAC2F8 /* PGRBTEnumerator.m in Sources */,
 				1117D62B8A624DB5474D2087 /* PGRBTInternal.m in Sources */,
 				1117D6A0661C181945502821 /* PGRBTDrawingTools.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83977902206975D5007D3746 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8397790F20697640007D3746 /* RedBlackTrees.m in Sources */,
+				8397791020697640007D3746 /* PGRBTMap.m in Sources */,
+				8397791120697640007D3746 /* PGRBTNode.m in Sources */,
+				8397791220697640007D3746 /* PGRBTEnumerator.m in Sources */,
+				8397791320697640007D3746 /* PGRBTInternal.m in Sources */,
+				8397791420697640007D3746 /* PGRBTDrawingTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +582,27 @@
 			};
 			name = Release;
 		};
+		8397790D206975D6007D3746 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+			};
+			name = Debug;
+		};
+		8397790E206975D6007D3746 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q5XWZ7S7E9;
+				EXECUTABLE_PREFIX = lib;
+				GCC_OPTIMIZATION_LEVEL = fast;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+			};
+			name = Release;
+		};
 		83D7831620656484007C8B08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -593,6 +691,15 @@
 			buildConfigurations = (
 				83381A492062DC8500EC3526 /* Debug */,
 				83381A4A2062DC8500EC3526 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8397790C206975D6007D3746 /* Build configuration list for PBXNativeTarget "RedBlackTreesStatic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8397790D206975D6007D3746 /* Debug */,
+				8397790E206975D6007D3746 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
