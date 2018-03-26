@@ -44,12 +44,12 @@ mkdir -p "${DSTROOT}/${FRAMEWORK_INSTALL_PATH}"
 xcodebuild -project "${PROJECT}.xcodeproj" -target "${PROJECT}" -configuration Release \
     clean build install DSTROOT="${DSTROOT}/" INSTALL_PATH="/${LIB_INSTALL_PATH}/dynamic" \
     PUBLIC_HEADERS_FOLDER_PATH="/${PUBLIC_HEADERS_FOLDER_PATH}" SKIP_INSTALL=No \
-    > "${DSTROOT}/${PROJECT}dynamic.log"
+    > "${DSTROOT}/${PROJECT}Dynamic.log"
 
 xcodebuild -project "${PROJECT}.xcodeproj" -target "${PROJECT}Static" -configuration Release \
     clean build install DSTROOT="${DSTROOT}/" INSTALL_PATH="/${LIB_INSTALL_PATH}/static" \
     PUBLIC_HEADERS_FOLDER_PATH="/${PUBLIC_HEADERS_FOLDER_PATH}" SKIP_INSTALL=No \
-    > "${DSTROOT}/${PROJECT}static.log"
+    > "${DSTROOT}/${PROJECT}Static.log"
 
 xcodebuild -project "${PROJECT}.xcodeproj" -target "${PROJECT}Framework" -configuration Release \
     clean build install DSTROOT="${DSTROOT}/" INSTALL_PATH="/${FRAMEWORK_INSTALL_PATH}" SKIP_INSTALL=No \
